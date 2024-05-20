@@ -1,4 +1,5 @@
 //Default
+import "./index.css"
 export default function Dashboard() {
     return (
         <div id="wd-dashboard">
