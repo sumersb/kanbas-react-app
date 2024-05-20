@@ -1,3 +1,4 @@
+//Default
 export default function Dashboard() {
     return (
         <div id="wd-dashboard">
