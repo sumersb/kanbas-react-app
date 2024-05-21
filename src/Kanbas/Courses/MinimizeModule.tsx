@@ -65,10 +65,12 @@ export default function MinimizeModule() {
                     </li>
                 </ul>
             </div>
-            <div className="d-inline text-white me-1 flex-grow-1">
-                <h2 className="d-inline">
-                    Course 1234
-                </h2>
+            <div className="text-white text-center me-1 d-inline">
+                <div>
+                    <h2 className="d-inline mb-0">Course 1234</h2>
+                    <br />
+                    <span>Modules</span>
+                </div>
             </div>
             <div className="dropdown d-inline me-1">
                 <button id="wd-kanbas-nav-drop-down" className="btn btn-lg dropdown-toggle"
