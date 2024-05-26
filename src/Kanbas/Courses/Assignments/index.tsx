@@ -4,9 +4,15 @@ import AssignmentMove from "./AssignmentMove";
 import LessonControlButtons from "./LessonControlButton";
 import AssignmentInfo from "./AssignmentInfo";
 import "./index.css"
+import { useParams } from "react-router";
+import * as db from "../../Database"
+
+
 
 
 export default function Assignments() {
+    const { cid } = useParams();
+    const assignments = db.assignments;
     return (
         <div id="wd-assignments">
             <AssignmentControls /><br></br><br></br>
@@ -19,6 +25,9 @@ export default function Assignments() {
 
                     </div>
                     <ul className="wd-lessons list-group rounded-0">
+                        {/* {assignments
+                            .filter( (assignment) => assignment.course === cid )
+                            .map(assi)} */}
                         <li className="wd-lesson list-group-item p-3 ps-1 d-flex align-items-center">
                             <AssignmentMove />
                             <p className="flex-grow-1">

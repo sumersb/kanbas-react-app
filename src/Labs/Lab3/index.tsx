@@ -22,7 +22,18 @@ import House from "./House"
 import TodoItem from "./Todos/TodoItem"
 import TodoList from "./Todos/TodoList"
 import Spreading from "./Spreading"
+import Destructing from "./Destructing"
+import FunctionDestructing from "./FunctionDestructing"
+import DestructingImports from "./DestructingImports"
+import Classes from "./Classes"
+import Styles from "./Styles"
+import Add from "./Add"
+import Square from "./Square"
+import Highlight from "./Highlight"
+import AddPathParameters from "./AddPathParameters"
+import PathParameters from "./PathParameters"
 export default function Lab3() {
+    console.log("Hello World!")
     return (
         <div id="wd-lab3" className="container-fluid">
             <h2>Lab 3</h2>
@@ -50,6 +61,21 @@ export default function Lab3() {
             <TodoItem />
             <TodoList />
             <Spreading />
+            <Destructing />
+            <FunctionDestructing />
+            <DestructingImports />
+            <Classes />
+            <Styles />
+            <Add a={3} b={4} />
+            <h4>Square of 4</h4>
+            <Square>4</Square>
+            <Highlight>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipitratione eaque illo minus cum, saepe totam
+                vel nihil repellat nemo explicabo excepturi consectetur. Modi omnis minus sequi maiores, provident voluptates.
+            </Highlight>
+            <PathParameters />
+            <hr />
+
         </div>
     )
 }
