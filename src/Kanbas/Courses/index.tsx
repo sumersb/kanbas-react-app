@@ -8,7 +8,7 @@ import { Navigate, Route, Routes, useParams, useLocation } from "react-router";
 import { FaAlignJustify } from "react-icons/fa";
 import MinimizeModule from "./MinimizeModule";
 import { courses } from "../Database"
-
+//comment
 export default function Courses() {
   const { cid } = useParams();
   const course = courses.find((course) => course._id === cid)
