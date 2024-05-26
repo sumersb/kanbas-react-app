@@ -6,6 +6,7 @@ import AssignmentInfo from "./AssignmentInfo";
 import "./index.css"
 import { useParams } from "react-router";
 import * as db from "../../Database"
+import Date from "./Date";
 
 
 
@@ -25,48 +26,23 @@ export default function Assignments() {
 
                     </div>
                     <ul className="wd-lessons list-group rounded-0">
-                        {/* {assignments
-                            .filter( (assignment) => assignment.course === cid )
-                            .map(assi)} */}
-                        <li className="wd-lesson list-group-item p-3 ps-1 d-flex align-items-center">
-                            <AssignmentMove />
-                            <p className="flex-grow-1">
-                                <a className="text-decoration-none text-dark fw-bold wd-assignment-link"
-                                    href="#/Kanbas/Courses/1234/Assignments/123">
-                                    A1
-                                </a>
-                                <br></br>
-                                <span className="text-danger">Multiple Modules</span> | <b>Not available until</b> May 6 at 12:00 am<br></br>
-                                <b>Due</b> May 13 at 11:59pm | 100pts
-                            </p>
-                            <LessonControlButtons />
-                        </li>
-                        <li className="wd-lesson list-group-item p-3 ps-1 d-flex align-items-center">
-                            <AssignmentMove />
-                            <p className="flex-grow-1">
-                                <a className="text-decoration-none text-dark fw-bold wd-assignment-link"
-                                    href="#/Kanbas/Courses/1234/Assignments/123">
-                                    A2
-                                </a>
-                                <br></br>
-                                <span className="text-danger">Multiple Modules</span> | <b>Not available until</b> May 13 at 12:00 am<br></br>
-                                <b>Due</b> May 13 at 11:59pm | 100pts
-                            </p>
-                            <LessonControlButtons />
-                        </li>
-                        <li className="wd-lesson list-group-item p-3 ps-1 d-flex align-items-center">
-                            <AssignmentMove />
-                            <p className="flex-grow-1">
-                                <a className="text-decoration-none text-dark fw-bold wd-assignment-link"
-                                    href="#/Kanbas/Courses/1234/Assignments/123">
-                                    A3
-                                </a>
-                                <br></br>
-                                <span className="text-danger">Multiple Modules</span> | <b>Not available until</b> May 13 at 12:00 am<br></br>
-                                <b>Due</b> May 120 at 11:59pm | 100pts
-                            </p>
-                            <LessonControlButtons />
-                        </li>
+                        {assignments
+                            .filter((assignment) => assignment.course === cid)
+                            .map((assignment) =>
+                                <li className="wd-lesson list-group-item p-3 ps-1 d-flex align-items-center">
+                                    <AssignmentMove />
+                                    <p className="flex-grow-1">
+                                        <a className="text-decoration-none text-dark fw-bold wd-assignment-link"
+                                            href={`#/Kanbas/Courses/${cid}/Assignments/${assignment._id}`}>
+                                            {assignment.title}
+                                        </a>
+                                        <br></br>
+                                        <span className="text-danger">Multiple Modules</span> | <b>Not available until</b> {Date.getMonthString(assignment.release_date)} {Date.getDay(assignment.release_date)} at 11:59pm<br></br>
+                                        <b>Due</b> {Date.getMonthString(assignment.due_date)} {Date.getDay(assignment.due_date)} at 11:59pm | {assignment.points}pts
+                                    </p>
+                                    <LessonControlButtons />
+                                </li>
+                            )}
                     </ul>
                 </li>
             </ul>

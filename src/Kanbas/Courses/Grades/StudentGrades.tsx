@@ -1,6 +1,14 @@
 import { IoEnterOutline } from "react-icons/io5";
+import * as db from "../../Database"
+import { useParams } from "react-router";
 
 export default function StudentGrades() {
+    const { cid } = useParams();
+    const assignments = db.assignments.filter((a) => a.course === cid);
+    const enrollments = db.enrollments.filter((e) => e.course === cid);
+    const usersFinder = enrollments.map((e) => db.users.find((u) => u._id === e.user));
+    const users = usersFinder ? usersFinder : [];
+    const grades = db.grades;
     return (
         <div className="row">
             <div id="wd-student-grade-tables">
@@ -9,54 +17,21 @@ export default function StudentGrades() {
                         <thead>
                             <tr>
                                 <th><b>Student Name</b></th>
-                                <th>A1 SETUP<br></br>Out of 100</th>
-                                <th>A2 HTML<br></br>Out of 100</th>
-                                <th>A3 CSS<br></br>Out of 100</th>
-                                <th>A4 Bootstrap<br></br>Out of 100</th>
+                                {assignments.map((a) =>
+                                    <th>{a.title}<br></br>Out of {a.points}pts</th>
+                                )}
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td className="text-danger">Sumer Bal</td>
-                                <td><input className="border-danger form-control input-sm d-inline" style={{ maxWidth: '70px' }} value={100} /><IoEnterOutline/></td>
-                                <td>100%</td>
-                                <td>100%</td>
-                                <td>100%</td>
-                            </tr>
-                            <tr>
-                                <td className="text-danger">Sumer Bal</td>
-                                <td>100%</td>
-                                <td>100%</td>
-                                <td>100%</td>
-                                <td>100%</td>
-                            </tr>
-                            <tr>
-                                <td className="text-danger">Sumer Bal</td>
-                                <td>100%</td>
-                                <td>100%</td>
-                                <td>100%</td>
-                                <td>100%</td>
-                            </tr>
-                            <tr>
-                                <td className="text-danger">Sumer Bal</td>
-                                <td>100%</td>
-                                <td>100%</td>
-                                <td>100%</td>
-                                <td>100%</td>
-                            </tr>
-                            <tr>
-                                <td className="text-danger">Sumer Bal</td>
-                                <td>100%</td>
-                                <td>100%</td>
-                                <td>100%</td>
-                                <td>100%</td>
-                            </tr><tr>
-                                <td className="text-danger">Sumer Bal</td>
-                                <td>100%</td>
-                                <td>100%</td>
-                                <td>100%</td>
-                                <td>100%</td>
-                            </tr>
+                            {users.map((u) =>
+                                <tr>
+                                    <td className="text-danger">{u?.firstName} {u?.lastName}  </td>
+                                    {assignments.map((a) => 
+                                    <td>
+                                        {grades.find( (g) => g.student === u?._id && g.assignment === a._id)?.grade}
+                                    </td>)
+                                    }
+                                </tr>)}
                         </tbody>
                     </table>
                 </div>

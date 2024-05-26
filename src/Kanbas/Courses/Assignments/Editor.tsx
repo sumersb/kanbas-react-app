@@ -1,11 +1,30 @@
+import "./index.css"
+import { useParams } from "react-router";
+import * as db from "../../Database"
+import Date from "./Date";
+
 export default function AssignmentEditor() {
+
+    const { aid } = useParams();
+    const assignments = db.assignments;
+    const temp = assignments.find((a) => a._id === aid)
+    const assignment = (temp) ? temp : {
+        "_id": "A1",
+        "title": "Title",
+        "course": "Course ID",
+        "release_date": [2025, 1, 1],
+        "due_date": [2025, 1, 1],
+        "points": "100"
+      }
+    
+    const test = "2025-5-13"
     return (
         <div id="wd-assignments-editor">
             <div className="mb-3">
                 <label htmlFor="wd-name" className="form-label">
                     Assignment Name</label>
                 <input type="text" className="form-control"
-                    id="wd-name" placeholder="Assignment Name" />
+                    id="wd-name" placeholder={`${assignment.title}`} />
             </div>
             <div id="wd-description" className="border">
                 <br></br>
@@ -125,13 +144,15 @@ export default function AssignmentEditor() {
                         </div>
                         <div className="flex-grow-1 mb-3">
                             <label htmlFor="wd-due-date" className="form-label"><b>Due</b></label>
-                            <input className="form-control" id='wd-due-date' type='date'></input>
+                            <input className="form-control" id='wd-due-date' type='date'
+                            value={`${Date.getFormattedDate(assignment.due_date)}`}></input>
                         </div>
                         <div>
                             <div className="row">
                                 <div className="form-group col-md-6">
                                     <label htmlFor="wd-available-from" className="form-label"><b>Available from</b></label>
-                                    <input className="form-control" id="wd-available-from" type='date' />
+                                    <input className="form-control" id="wd-available-from" type='date' 
+                                    value={`${Date.getFormattedDate(assignment.release_date)}`}/>
                                 </div>
                                 <div className="form-group col-md-6">
                                     <label htmlFor="wd-available-until" className="form-label"><b>Available Until</b></label>
