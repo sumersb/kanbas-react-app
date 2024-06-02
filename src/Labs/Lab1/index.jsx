@@ -1,6 +1,12 @@
 export default function Lab1() {
+    const handleClick = (parameter = "Hello") => {
+        console.log(parameter)
+    }
     return (
         <div>
+            <button onClick={handleClick}>
+                Hello
+            </button>
             <h2>Lab 1</h2>
             <h3>HTML Examples</h3>
             <div id="wd-h-tag">
