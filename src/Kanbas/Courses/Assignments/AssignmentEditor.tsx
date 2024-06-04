@@ -85,7 +85,7 @@ export default function AssignmentEditor() {
                 <a href={`#/Kanbas/Courses/${cid}/Assignments`}>
                     <button id="wd-add-assignment-btn" className="btn btn-lg btn-danger me-1 float-end"
                         onClick={() => dispatch(addAssignment(assignment))} >
-                        Submit
+                        Save
                     </button>
                     <button id="wd-view-progress" className="btn btn-lg btn-secondary me-1 float-end">
                         Cancel
