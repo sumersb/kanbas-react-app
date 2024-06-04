@@ -2,21 +2,26 @@ import "./index.css"
 import { useParams } from "react-router";
 import * as db from "../../Database"
 import Date from "./Date";
+import { useState } from "react";
 
-export default function AssignmentEditor() {
+export default function addAssignment() {
 
     const { aid } = useParams();
     const assignments = db.assignments;
     const temp = assignments.find((a) => a._id === aid)
-    const assignment = (temp) ? temp : {
+    const [assignment, setAssignment] = useState({
         "_id": "A1",
         "title": "Title",
         "course": "Course ID",
+        "description": "Fill area with description of assignment",
         "release_date": [2025, 1, 1],
         "due_date": [2025, 1, 1],
         "points": "100"
-    }
-
+    })
+    // //<input
+    // value={person.name}
+    // onChange={(e) => setPerson({ ...person, name: e.target.value })}
+    // />
     const test = "2025-5-13"
     return (
         <div id="wd-assignments-editor">
@@ -24,7 +29,9 @@ export default function AssignmentEditor() {
                 <label htmlFor="wd-name" className="form-label">
                     Assignment Name</label>
                 <input type="text" className="form-control"
-                    id="wd-name" placeholder={`${assignment.title}`} />
+                    id="wd-name" placeholder={`${assignment.title}`}
+                    value={assignment.title}
+                    onChange={(e) => setAssignment({ ...assignment, title: e.target.value })} />
             </div>
             <div id="wd-description" className="border">
                 <br></br>
@@ -51,7 +58,8 @@ export default function AssignmentEditor() {
                 </label>
                 <div className="col-sm-10">
                     <input type="text" className="form-control"
-                        id="wd-points" value={100} />
+                        id="wd-points" value={assignment.points}
+                        onChange={(e) => setAssignment({ ...assignment, points: e.target.value })} />
                 </div>
             </div>
             <div className="mb-3 row">

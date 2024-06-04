@@ -7,7 +7,7 @@ import GreenCheckmark from "./GreenCheckMark";
 export default function AssignmentMove() {
     return (
         <div className="float-start">
-            <BsGripVertical className="me-2 fs-3"/>            
+            <BsGripVertical className="me-2 fs-3" />
             <TbFilePencil className="me-2 fs-3 text-success" />
         </div>
     );

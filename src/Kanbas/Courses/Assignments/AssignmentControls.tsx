@@ -14,9 +14,10 @@ export default function AssignmentControls() {
             </button>
             <span className="btn btn-lg btn-white  border p-0 pl-5">
                 <label htmlFor="wd-search-assignment">
-                    <FaSearch className="position-relative me-2" style={{ bottom: "1px",
-                        left:"5px"
-                     }}/>
+                    <FaSearch className="position-relative me-2" style={{
+                        bottom: "1px",
+                        left: "5px"
+                    }} />
                 </label>
                 <input id="wd-search-assignment" className="btn btn-lg btn-white me-1 flex-grow"
                     placeholder="Search ..."
