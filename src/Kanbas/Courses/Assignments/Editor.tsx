@@ -5,15 +5,17 @@ import Date from "./Date";
 
 export default function AssignmentsEditor() {
 
-    const { aid } = useParams();
+    const { aid, cid } = useParams();
     const assignments = db.assignments;
     const temp = assignments.find((a) => a._id === aid)
     const assignment = (temp) ? temp : {
         "_id": "A1",
-        "title": "Title",
-        "course": "Course ID",
-        "release_date": [2025, 1, 1],
-        "due_date": [2025, 1, 1],
+        "title": "New Assignment",
+        "course": { cid },
+        "description": "New Assignment Description",
+        "available-from": "2025-01-01",
+        "available-until": "2025-12-31",
+        "due-date": "2025-01-01",
         "points": "100"
     }
 
@@ -145,14 +147,14 @@ export default function AssignmentsEditor() {
                         <div className="flex-grow-1 mb-3">
                             <label htmlFor="wd-due-date" className="form-label"><b>Due</b></label>
                             <input className="form-control" id='wd-due-date' type='date'
-                                value={`${Date.getFormattedDate(assignment.due_date)}`}></input>
+                                value={assignment['due-date']}></input>
                         </div>
                         <div>
                             <div className="row">
                                 <div className="form-group col-md-6">
                                     <label htmlFor="wd-available-from" className="form-label"><b>Available from</b></label>
                                     <input className="form-control" id="wd-available-from" type='date'
-                                        value={`${Date.getFormattedDate(assignment.release_date)}`} />
+                                        value={assignment["available-from"]} />
                                 </div>
                                 <div className="form-group col-md-6">
                                     <label htmlFor="wd-available-until" className="form-label"><b>Available Until</b></label>

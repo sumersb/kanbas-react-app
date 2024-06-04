@@ -6,8 +6,8 @@ const initialState = {
         "_id": "A303",
         "title": "Systems Engineering Exam",
         "course": "RS103",
-        "release_date": [2025, 5, 20],
-        "due_date": [2025, 5, 27],
+        "available-from": "2025-05-20",
+        "due-date": "2025-05-27",
         "points": "100"
     }
 };
@@ -18,7 +18,6 @@ const assignmentsSlice = createSlice({
         addAssignment: (state, { payload: assigment }) => {
             const newAssignment: any = {
                 _id: new Date().getTime().toString(),
-                lessons: [],
                 name: assigment.name,
                 course: assigment.course,
             };

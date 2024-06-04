@@ -1,13 +1,18 @@
 import { FaPlus } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
 import GreenCheckmark from "./GreenCheckMark";
-export default function AssignmentControls() {
+import { useParams } from "react-router";
+export default function AssignmentControls(
+) {
+    const { cid } = useParams();
     return (
         <div id="wd-modules-controls" className="text-nowrap">
-            <button id="wd-add-assignment-btn" className="btn btn-lg btn-danger me-1 float-end">
-                <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
-                Assignment
-            </button>
+            <a href={`#/Kanbas/Courses/${cid}/Assignments/Add`}>
+                <button id="wd-add-assignment-btn" className="btn btn-lg btn-danger me-1 float-end">
+                    <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
+                    Assignment
+                </button>
+            </a>
             <button id="wd-add-assignment-group" className="btn btn-lg btn-white me-1 float-end">
                 <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
                 Group
@@ -27,3 +32,8 @@ export default function AssignmentControls() {
         </div>
     );
 }
+
+{/* <a className="text-decoration-none text-dark fw-bold wd-assignment-link"
+    href={`#/Kanbas/Courses/${cid}/Assignments/${assignment._id}`}>
+    {assignment.title}
+</a> */}

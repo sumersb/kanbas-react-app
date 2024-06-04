@@ -1,17 +1,17 @@
 import "./index.css"
 import { useParams } from "react-router";
-import * as db from "../../Database"
-import Date from "./Date";
 import { useState } from "react";
+import { addAssignment } from "./reducer";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function AssignmentEditor() {
 
     const { cid } = useParams();
-    const assignments = db.assignments;
+    const dispatch = useDispatch();
     const [assignment, setAssignment] = useState({
         "_id": "A1",
         "title": "New Assignment",
-        "course": "Course ID",
+        "course": "RS101",
         "description": "New Assignment Description",
         "available-from": "",
         "available-until": "",
@@ -83,13 +83,20 @@ export default function AssignmentEditor() {
                 </div>
             </div>
             <hr></hr>
-            <button id="wd-add-module-btn" className="btn btn-lg btn-danger me-1 float-end"
-                data-bs-toggle="modal" data-bs-target="#wd-add-module-dialog" >
-                Submit
-            </button>
-            <button id="wd-view-progress" className="btn btn-lg btn-secondary me-1 float-end">
-                Cancel
-            </button>
+            <a href={`#/Kanbas/Courses/${cid}/Assignments`}>
+                <button id="wd-add-assignment-btn" className="btn btn-lg btn-danger me-1 float-end"
+                    onClick={() => dispatch(addAssignment(assignment))} >
+                    Submit
+                </button>
+                <button id="wd-view-progress" className="btn btn-lg btn-secondary me-1 float-end">
+                    Cancel
+                </button>
+            </a>
         </div>
     );
 }
+
+{/* <a className="text-decoration-none text-dark fw-bold wd-assignment-link"
+    href={`#/Kanbas/Courses/${cid}/Assignments/${assignment._id}`}>
+    {assignment.title}
+</a> */}
