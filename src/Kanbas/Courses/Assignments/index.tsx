@@ -40,8 +40,8 @@ export default function Assignments() {
                                             {assignment.title}
                                         </a>
                                         <br></br>
-                                        <span className="text-danger">Multiple Modules</span> | <b>Not available until</b> {Date.getMonthString(assignment.release_date)} {Date.getDay(assignment.release_date)} at 11:59pm<br></br>
-                                        <b>Due</b> {Date.getMonthString(assignment.due_date)} {Date.getDay(assignment.due_date)} at 11:59pm | {assignment.points}pts
+                                        <span className="text-danger">Multiple Modules</span> | <b>Not available until</b> {Date.getMonthString(assignment["available-from"])} {Date.getDay(assignment["available-from"])} at 11:59pm<br></br>
+                                        <b>Due</b> {Date.getMonthString(assignment["due-date"])} {Date.getDay(assignment["due-date"])} at 11:59pm | {assignment.points}pts
                                     </p>
                                     <LessonControlButtons
                                         assignmentID={assignment._id}
