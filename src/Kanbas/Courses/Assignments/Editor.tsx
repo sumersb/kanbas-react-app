@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 import * as db from "../../Database"
 import Date from "./Date";
 
-export default function AssignmentEditor() {
+export default function AssignmentsEditor() {
 
     const { aid } = useParams();
     const assignments = db.assignments;

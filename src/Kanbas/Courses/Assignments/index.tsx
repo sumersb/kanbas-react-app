@@ -16,14 +16,6 @@ export default function Assignments() {
     const { cid } = useParams();
     const { assignments } = useSelector((state: any) => state.assignmentsReducer)
     const dispatch = useDispatch();
-    const [assignment, setAssignment] = useState({
-        "_id": "A1",
-        "title": "Title",
-        "course": "Course ID",
-        "release_date": "2010-10-10",
-        "due_date": "2010-10-10",
-        "points": "100"
-    });
 
     return (
         <div id="wd-assignments">
