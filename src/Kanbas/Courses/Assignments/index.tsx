@@ -53,7 +53,6 @@ export default function Assignments() {
                     </ul>
                 </li>
             </ul>
-
         </div>
     );
 }

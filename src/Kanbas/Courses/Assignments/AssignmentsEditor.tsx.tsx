@@ -1,30 +1,27 @@
 import "./index.css"
 import { useParams } from "react-router";
 import { useState } from "react";
-import { addAssignment } from "./reducer";
+import { updateAssignment } from "./reducer";
 import { useSelector, useDispatch } from "react-redux";
 
-export default function AssignmentEditor() {
+export default function AssignmentsEditor() {
 
-    const { cid } = useParams();
     const dispatch = useDispatch();
-    const [assignment, setAssignment] = useState({
+    const { aid, cid } = useParams();
+    const { assignments } = useSelector((state: any) => state.assignmentsReducer)
+    const temp = assignments.find((a: any) => a._id === aid)
+    const [assignment, setAssignment] = useState((temp) ? temp : {
+        "._id": { aid },
         "title": "New Assignment",
-        "course": "RS101",
+        "course": { cid },
         "description": "New Assignment Description",
-        "available-from": "03-03-0003",
-        "available-until": "01-01-0001",
-        "due-date": "02-02-0002",
+        "available-from": "2025-01-01",
+        "available-until": "2025-12-31",
+        "due-date": "2025-01-01",
         "points": "100"
     })
-    // //<input
-    // value={person.name}
-    // onChange={(e) => setPerson({ ...person, name: e.target.value })}
-    // />
-    // <input value={course.name} className="form-control mb-2"
-    //             onChange={(e) => setCourse({ ...course, name: e.target.value })} />
-    //         <textarea value={course.description} className="form-control"
-    //             onChange={(e) => setCourse({ ...course, description: e.target.value })} />
+
+    const test = "2025-5-13"
     return (
         <div id="wd-assignments-editor">
             <div className="mb-3">
@@ -84,7 +81,7 @@ export default function AssignmentEditor() {
             <div>
                 <a href={`#/Kanbas/Courses/${cid}/Assignments`}>
                     <button id="wd-add-assignment-btn" className="btn btn-lg btn-danger me-1 float-end"
-                        onClick={() => dispatch(addAssignment(assignment))} >
+                        onClick={() => dispatch(updateAssignment(assignment))} >
                         Submit
                     </button>
                     <button id="wd-view-progress" className="btn btn-lg btn-secondary me-1 float-end">
@@ -95,4 +92,3 @@ export default function AssignmentEditor() {
         </div>
     );
 }
-

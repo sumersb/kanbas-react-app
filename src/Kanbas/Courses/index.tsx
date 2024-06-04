@@ -2,12 +2,11 @@ import CoursesNavigation from "./Navigation";
 import Modules from "./Modules";
 import Home from "./Home";
 import Assignments from "./Assignments";
-import AssignmentsEditor from "./Assignments/Editor";
+import AssignmentsEditor from "./Assignments/AssignmentsEditor.tsx";
 import Grades from "./Grades";
 import { Navigate, Route, Routes, useParams, useLocation } from "react-router";
 import { FaAlignJustify } from "react-icons/fa";
 import MinimizeModule from "./MinimizeModule";
-import AddAssignment from "./Assignments/AssignmentEditor";
 import AssignmentEditor from "./Assignments/AssignmentEditor";
 //comment
 export default function Courses({ courses }: { courses: any[]; }) {
