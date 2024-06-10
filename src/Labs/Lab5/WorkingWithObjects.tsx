@@ -29,7 +29,20 @@ export default function WorkingWithObjects() {
                 value={assignment.score} onChange={(e) =>
                     setAssignment({ ...assignment, score: Number(e.target.value) })} />
             <hr />
-
+            <div className="flex justify-content-between">
+                <a id="wd-update-assignment-completed"
+                    className="btn btn-primary float-end"
+                    href={`${ASSIGNMENT_API_URL}/completed/${assignment.completed}`}>
+                    Update Assignment Completed
+                </a>
+                <input id="wd-assignment-completed" type="checkbox"
+                    value={String(!assignment.completed)} onChange={(e) =>
+                        setAssignment({ ...assignment, completed: !assignment.completed })} />
+                <label className = "btn" htmlFor="wd-assignment-completed">
+                    {assignment.completed ? "Completed" : "Not Completed"}
+                </label>
+            </div>
+            <hr></hr>
             <h4>Retrieving Objects</h4>
             <a id="wd-retrieve-assignments" className="btn btn-primary"
                 href={`${REMOTE_SERVER}/lab5/assignment`}>
