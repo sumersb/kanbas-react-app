@@ -53,6 +53,7 @@ export default function Modules() {
             .filter((module: any) => module.course === cid)
             .map((module: any) => (
               <li className="wd-module list-group-item p-0 mb-5 fs-5 border-gray">
+                {JSON.stringify(module._id)}
                 <div className="wd-title p-3 ps-2 bg-secondary">
                   <BsGripVertical className="me-2 fs-3" />{!module.editing && module.name}
                   {module.editing && (
@@ -63,7 +64,6 @@ export default function Modules() {
                           saveModule({ ...module, editing: false });
                         }
                       }} />
-
                   )}
                   <ModuleControlButtons moduleId={module._id}
                     deleteModule={(moduleId) => { removeModule(moduleId); }}
@@ -85,6 +85,7 @@ export default function Modules() {
             ))}
         </ul>
       </div>
+      {JSON.stringify(modules)}
     </div>
   );
 }

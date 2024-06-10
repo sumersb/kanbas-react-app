@@ -20,6 +20,7 @@ const modulesSlice = createSlice({
             state.modules = [...state.modules, newModule] as any;
         },
         deleteModule: (state, { payload: moduleId }) => {
+            console.log("IVE BEEN DELETED")
             state.modules = state.modules.filter(
                 (m: any) => m._id !== moduleId);
         },
@@ -29,6 +30,7 @@ const modulesSlice = createSlice({
             ) as any;
         },
         editModule: (state, { payload: moduleId }) => {
+            console.log("TOUCH ME")
             state.modules = state.modules.map((m: any) =>
                 m._id === moduleId ? { ...m, editing: true } : m
             ) as any;
