@@ -17,11 +17,16 @@ export default function AssignmentsEditor() {
     const fetchAssignment = async () => {
         const fetchedAssignment = await client.findAssignment(cid as string, aid as string);
         dispatch(setAssignment(fetchedAssignment));
-        setAssignment(fetchedAssignment);
-    }
+    };
+
     useEffect(() => {
         fetchAssignment();
-    })
+    }, []);
+
+    useEffect(() => {
+        setTemporaryAssignment(assignment);
+    }, [assignment]);
+
 
     const saveAssignment = async (assignment: any) => {
         const status = await client.updateAssignment(assignment);
@@ -62,7 +67,7 @@ export default function AssignmentsEditor() {
                             <label htmlFor="wd-due-date" className="form-label"><b>Due</b></label>
                             <input className="form-control" id='wd-due-date' type='date'
                                 value={temporaryAssignment["due-date"]}
-                                onChange={(e) => temporaryAssignment({ ...temporaryAssignment, "due-date": e.target.value })}></input>
+                                onChange={(e) => setTemporaryAssignment({ ...temporaryAssignment, "due-date": e.target.value })}></input>
                         </div>
                         <div>
                             <div className="row pb-3">
