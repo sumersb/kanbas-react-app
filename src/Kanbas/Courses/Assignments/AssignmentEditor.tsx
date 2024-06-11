@@ -3,28 +3,27 @@ import { useParams } from "react-router";
 import { useState } from "react";
 import { addAssignment } from "./reducer";
 import { useSelector, useDispatch } from "react-redux";
+import * as client from "./client";
 
 export default function AssignmentEditor() {
 
     const { cid } = useParams();
     const dispatch = useDispatch();
+    
     const [assignment, setAssignment] = useState({
         "title": "New Assignment",
-        "course": "RS101",
         "description": "New Assignment Description",
-        "available-from": "03-03-0003",
-        "available-until": "01-01-0001",
-        "due-date": "02-02-0002",
+        "available-from": "0003-03-03",
+        "available-until": "0001-01-01",
+        "due-date": "0002-02-02",
         "points": "100"
     })
-    // //<input
-    // value={person.name}
-    // onChange={(e) => setPerson({ ...person, name: e.target.value })}
-    // />
-    // <input value={course.name} className="form-control mb-2"
-    //             onChange={(e) => setCourse({ ...course, name: e.target.value })} />
-    //         <textarea value={course.description} className="form-control"
-    //             onChange={(e) => setCourse({ ...course, description: e.target.value })} />
+
+    const createAssignment = async (assignment: any) => {
+        const newAssignment = await client.createAssignment(cid as string, assignment);
+        dispatch(addAssignment(newAssignment));
+    };
+
     return (
         <div id="wd-assignments-editor">
             <div className="mb-3">
@@ -84,7 +83,7 @@ export default function AssignmentEditor() {
             <div>
                 <a href={`#/Kanbas/Courses/${cid}/Assignments`}>
                     <button id="wd-add-assignment-btn" className="btn btn-lg btn-danger me-1 float-end"
-                        onClick={() => dispatch(addAssignment(assignment))} >
+                        onClick={() => createAssignment( assignment)} >
                         Save
                     </button>
                     <button id="wd-view-progress" className="btn btn-lg btn-secondary me-1 float-end">

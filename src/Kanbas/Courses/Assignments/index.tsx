@@ -6,9 +6,10 @@ import AssignmentInfo from "./AssignmentInfo";
 import "./index.css"
 import { useParams } from "react-router";
 import Date from "./Date";
-import React, { useState } from "react";
-import { addAssignment, editAssignment, updateAssignment, deleteAssignment } from "./reducer";
+import React, { useState, useEffect } from "react";
+import { setAssignments, addAssignment, editAssignment, updateAssignment, deleteAssignment } from "./reducer";
 import { useSelector, useDispatch } from "react-redux";
+import * as client from "./client";
 
 
 
@@ -16,6 +17,19 @@ export default function Assignments() {
     const { cid } = useParams();
     const { assignments } = useSelector((state: any) => state.assignmentsReducer)
     const dispatch = useDispatch();
+
+    const fetchModules = async () => {
+        const modules = await client.findAssignmentsForCourse(cid as string);
+        dispatch(setAssignments(modules));
+    };
+    useEffect(() => {
+        fetchModules();
+    }, []);
+
+    const removeAssignment = async (assignmentID: string) => {
+        await client.deleteAssignment(assignmentID);
+        dispatch(deleteAssignment(assignmentID));
+    };
 
     return (
         <div id="wd-assignments">
@@ -46,7 +60,7 @@ export default function Assignments() {
                                     <LessonControlButtons
                                         assignmentID={assignment._id}
                                         deleteAssignment={(assignmentID) => {
-                                            dispatch(deleteAssignment(assignmentID));
+                                            removeAssignment(assignmentID);
                                         }} />
                                 </li>
                             )}
