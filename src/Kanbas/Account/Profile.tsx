@@ -1,8 +1,9 @@
 import * as client from "./client";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCurrentUser } from "./reducer";
+import JsonStringify from "../../Labs/Lab3/JsonStringify";
 export default function Profile() {
     const [profile, setProfile] = useState<any>({});
     const navigate = useNavigate();
@@ -10,6 +11,7 @@ export default function Profile() {
     const fetchProfile = async () => {
         try {
             const account = await client.profile();
+            console.log("account" + account)
             setProfile(account);
         } catch (err: any) {
             navigate("/Kanbas/Account/Signin");
