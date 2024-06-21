@@ -11,7 +11,6 @@ export default function Profile() {
     const fetchProfile = async () => {
         try {
             const account = await client.profile();
-            console.log("account" + account)
             setProfile(account);
         } catch (err: any) {
             navigate("/Kanbas/Account/Signin");
@@ -22,9 +21,14 @@ export default function Profile() {
         dispatch(setCurrentUser(null));
         navigate("/Kanbas/Account/Signin");
     };
+    const updateProfile = async (profile: any) => {
+        await client.updateProfile(profile);
+        navigate("/Kanbas/Account/Profile")
+    }
     useEffect(() => { fetchProfile(); }, []);
     return (
         <div>
+            {JSON.stringify(profile)}
             <h1>Profile</h1>
             {profile && (
                 <div className="form w-50">
@@ -34,12 +38,15 @@ export default function Profile() {
                     <input className="form-control mb-2" value={profile.lastName} onChange={(e) => setProfile({ ...profile, lastName: e.target.value })} />
                     <input className="form-control mb-2" value={profile.dob} onChange={(e) => setProfile({ ...profile, dob: e.target.value })} type="date" />
                     <input className="form-control mb-2" value={profile.email} onChange={(e) => setProfile({ ...profile, email: e.target.value })} />
-                    <select className="form-control mb-2" onChange={(e) => setProfile({ ...profile, role: e.target.value })}>
+                    <select value={profile.role} className="form-control mb-2" onChange={(e) => setProfile({ ...profile, role: e.target.value })}>
                         <option value="USER">User</option>            <option value="ADMIN">Admin</option>
                         <option value="FACULTY">Faculty</option>      <option value="STUDENT">Student</option>
                     </select>
                 </div>
             )}
+            <button onClick={() => updateProfile(profile)} className="btn btn-secondary mb-2 w-100">
+                Update Profile
+            </button>
             <button onClick={signout} className="btn btn-danger w-100">
                 Sign out
             </button>

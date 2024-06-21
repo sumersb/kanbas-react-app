@@ -10,16 +10,15 @@ import MinimizeModule from "./MinimizeModule";
 import AssignmentEditor from "./Assignments/AssignmentEditor";
 import PeopleTable from "./People/Table";
 import PeopleDetails from "./People/Details";
+import JsonStringify from "../../Labs/Lab3/JsonStringify";
 //comment
 export default function Courses({ courses }: { courses: any[]; }) {
-  const { cid } = useParams();
-  const course = courses.find((course) => course._id === cid);
   const { pathname } = useLocation();
   return (
     <div id="wd-courses">
       <div className="d-none d-md-block">
         <h2 className="text-danger d-none d-md-block"><FaAlignJustify className="me-4 fs-4 mb-1" />
-          {course && course.name}  &gt; {pathname.split("/")[4]}
+          {pathname.split("/")[3]}  &gt; {pathname.split("/")[4]}
         </h2>
         <hr />
       </div>
