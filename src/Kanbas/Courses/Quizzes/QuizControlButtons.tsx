@@ -1,0 +1,13 @@
+import { IoEllipsisVertical } from "react-icons/io5";
+import GreenCheckmark from "./GreenCheckMark";
+export default function QuizControlButtons({ quizID }: {
+    quizID: string;
+}) {
+    return (
+        <div className="float-end">
+
+            <GreenCheckmark />
+            <IoEllipsisVertical className="fs-4" />
+        </div>
+    );
+}
