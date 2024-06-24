@@ -21,7 +21,7 @@ export default function QuizQuestions({ quiz, setQuiz, questions, setQuestions }
     });
 
     const addQuestions = () => {
-        setQuestions([...questions, question])
+        setQuestions([...questions, question]);
     }
 
     const updateQuestion = (index: number, updatedQuestion: any) => {

@@ -47,8 +47,17 @@ export default function QuizzesEditor() {
 
     const [questions, setQuestions] = useState([]);
 
+    const calculateScore = async () => {
+        let tempscore = 0
+        questions.forEach((q: any) => {
+            tempscore+=q.points;
+        })
+        return tempscore
+    }
+
     const saveAndPublish = async () => {
-        const updatedQuiz = { ...quiz, questions: questions, published: true }
+        const score = await calculateScore();
+        const updatedQuiz = { ...quiz, questions: questions, published: true, points: score  }
         const newQuiz = await client.updateQuiz(updatedQuiz);
         setQuiz(newQuiz);
         navigate(`/Kanbas/Courses/${cid}/Quizzes`)

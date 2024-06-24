@@ -37,8 +37,20 @@ export default function QuizCreate() {
 
     const [questions, setQuestions] = useState([]);
 
+    const calculateScore = async () => {
+        let tempscore = 0
+        questions.forEach((q: any) => {
+            tempscore+=q.points;
+        })
+        return tempscore
+    }
+
+
     const saveAndPublish = async () => {
-        const updatedQuiz = { ...quiz, questions: questions, published: true }
+        console.log("Here")
+        const score = await calculateScore();
+        console.log(score);
+        const updatedQuiz = { ...quiz, questions: questions, published: true, points: score };
         const newQuiz = await client.createQuiz(updatedQuiz);
         setQuiz(newQuiz);
         navigate(`/Kanbas/Courses/${cid}/Quizzes`)
