@@ -63,7 +63,6 @@ export default function Dashboard(
 
     return (
         <div id="wd-dashboard">
-            {JSON.stringify(profile._id)}
             <h1 id="wd-dashboard-title">Dashboard</h1> <hr />
             <TopView
                 profile={profile}

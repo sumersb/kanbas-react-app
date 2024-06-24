@@ -28,7 +28,6 @@ export default function Profile() {
     useEffect(() => { fetchProfile(); }, []);
     return (
         <div>
-            {JSON.stringify(profile)}
             <h1>Profile</h1>
             {profile && (
                 <div className="form w-50">
