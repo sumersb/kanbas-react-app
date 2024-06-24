@@ -2,7 +2,6 @@ import { IoEllipsisVertical } from "react-icons/io5";
 import { BsGripVertical } from "react-icons/bs";
 import { TbFilePencil } from "react-icons/tb";
 
-import GreenCheckmark from "./GreenCheckMark";
 
 export default function AssignmentMove() {
     return (

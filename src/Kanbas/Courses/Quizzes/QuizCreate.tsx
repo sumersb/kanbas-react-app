@@ -1,27 +1,26 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import * as client from "./client";
-import { assignments } from "../../Database";
 import { Routes, Route } from "react-router";
-import QuizDetails from "./QuizDetails";
 import QuizQuestions from "./QuizQuestions";
-import Navbar from "./Navbar";
+import QuizDetailsEditor from "./QuizDetailsEditor";
+import QuizCreateNav from "./Navs/QuizCreateNav";
 
-export default function QuizEditor() {
+export default function QuizCreate() {
 
     const { cid } = useParams();
-
+    const navigate = useNavigate();
     const [quiz, setQuiz] = useState({
         title: 'Unnamed Quiz',
         published: false,
-        course_id: '',
+        course_id: cid,
         instructions: '',
         type: 'GRADED QUIZ',
         points: 100,
         assignment_group: 'QUIZZES',
         shuffle_answers: true,
         has_time_limit: false,
-        time_limit: 0,
+        time_limit: 20,
         multiple_attempts: false,
         num_attempts: 1,
         show_answers: false,
@@ -33,20 +32,21 @@ export default function QuizEditor() {
         available: '',
         until: '',
         assign: 'EVERYONE',
+        questions: []
     });
 
     const [questions, setQuestions] = useState([]);
 
-    const addQuiz = async (newQuiz: any) => {
-        const new_quiz = await client.createQuiz(newQuiz);
+    const saveAndPublish = async () => {
+        const updatedQuiz = { ...quiz, questions: questions, published: true }
+        const newQuiz = await client.createQuiz(updatedQuiz);
+        setQuiz(newQuiz);
+        navigate(`/Kanbas/Courses/${cid}/Quizzes`)
     }
-
-    const updateQuiz = async (updatedQuiz: any) => {
-        await client.updateQuiz(updatedQuiz);
-    };
 
     const setUp = async () => {
         setQuiz(quiz);
+        setQuestions(quiz.questions);
     }
 
     useEffect(() => {
@@ -55,25 +55,23 @@ export default function QuizEditor() {
 
     return (
         <div>
-            <Navbar />
+            <QuizCreateNav />
             <Routes>
-                <Route path="Details" element={<QuizDetails quiz={quiz} setQuiz={setQuiz}/>} />
-                <Route path="Questions" element={<QuizQuestions quiz={quiz} setQuiz={setQuiz} questions={questions} setQuestions={setQuestions}/>} />
-
+                <Route path="Details" element={<QuizDetailsEditor quiz={quiz} setQuiz={setQuiz} />} />
+                <Route path="Questions" element={<QuizQuestions quiz={quiz} setQuiz={setQuiz} questions={questions} setQuestions={setQuestions} />} />
             </Routes>
 
             <div>
 
-                <button id="wd-add-quiz-btn" className="btn btn-lg btn-danger me-1 float-end"
+                <button onClick={saveAndPublish} id="wd-add-quiz-btn" className="btn btn-lg btn-danger me-1 float-end"
                 >
-                    Save
+                    Save and Publish
                 </button>
                 <button id="wd-view-progress" className="btn btn-lg btn-secondary me-1 float-end">
                     Cancel
                 </button>
             </div>
-
-            
+            <hr></hr>
         </div>
     )
 }

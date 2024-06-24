@@ -1,7 +1,8 @@
 import { title } from "process";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { FaTrash } from "react-icons/fa";
 
-export default function MultipleChoiceEditor({
+export default function TrueOrFalseEditor({
     tempQuestion,
     setTempQuestion
 
@@ -9,6 +10,7 @@ export default function MultipleChoiceEditor({
     tempQuestion: any;
     setTempQuestion: (question: any) => void;
 }) {
+
     return (
         <div className="container p-3">
             {JSON.stringify(tempQuestion)}
@@ -38,24 +40,38 @@ export default function MultipleChoiceEditor({
                 </div>
                 <div className="col-md-2 float-end d-inline-flex">
 
-                    <input id="wd-question-points" type="number" className="form-control me-2"></input>
+                    <input value={tempQuestion.points}
+                        onChange={(e) => setTempQuestion({ ...tempQuestion, points: (e.target.value) })} id="wd-question-points" type="number" className="form-control me-2"></input>
                     <label htmlFor="wd-question-points" className="mt-2 ml-2">pts</label>
                 </div>
             </div>
-            <div>
+            <div className="mb-3">
                 <label className='form-label' htmlFor='wd-tempQuestion-tempQuestion'>Description</label>
-                <textarea value={tempQuestion.question} className="form-control" rows={5} id="wd-tempQuestion-tempQuestion" ></textarea>
+                <textarea value={tempQuestion.question}
+                    onChange={(e) => {
+                        setTempQuestion({ ...tempQuestion, question: e.target.value })
+                    }} className="form-control" rows={5} id="wd-tempQuestion-tempQuestion" ></textarea>
             </div>
+            <hr></hr>
             <div>
-                {tempQuestion.choices.map((c: any, i: number)=> (
-                    <div className="input-group">
-                    <div className="input-group-text">
-                      <input className="form-check-input mt-0" type="radio" value="" aria-label="Radio button for following text input"/>
+                <label className='form-label'>Answer</label>
+                <div>
+                    <div className="form-check mb-2">
+                        <input value={"true"} className="form-check-input" type="radio" name="true_false" id="true" onClick={() => { setTempQuestion({ ...tempQuestion, answers: ["true"] }) }} />
+                        <label className="form-check-label" htmlFor="true">
+                            True
+                        </label>
                     </div>
-                    <input value={c} onChange={(e) => setTempQuestion({...tempQuestion, choices:tempQuestion.choices.map((x: any, index: number) => (index === i ? e.target.value : x) )})} type="text" className="form-control" aria-label="Text input with radio button"/>
-                  </div>
-                ))}
+                    <div className="form-check mb-2">
+                        <input value={"false"} className="form-check-input" type="radio" name="true_false" id="false" onClick={() => { setTempQuestion({ ...tempQuestion, answers: ["false"] }) }} />
+                        <label className="form-check-label" htmlFor="false">
+                            False
+                        </label>
+                    </div>
+                </div>
             </div>
+
+            <hr></hr>
         </div>
     )
 }

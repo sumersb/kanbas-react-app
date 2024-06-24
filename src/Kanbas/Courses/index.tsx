@@ -5,19 +5,17 @@ import Assignments from "./Assignments";
 import AssignmentsEditor from "./Assignments/AssignmentsEditor.tsx";
 import Grades from "./Grades";
 import Quizzes from "./Quizzes";
-import { Navigate, Route, Routes, useParams, useLocation } from "react-router";
+import { Route, Routes, useLocation } from "react-router";
 import { FaAlignJustify } from "react-icons/fa";
 import MinimizeModule from "./MinimizeModule";
 import AssignmentEditor from "./Assignments/AssignmentEditor";
 import PeopleTable from "./People/Table";
-import PeopleDetails from "./People/Details";
-import JsonStringify from "../../Labs/Lab3/JsonStringify";
-import QuizEditor from "./Quizzes/QuizEditor";
-import QuizzesEditor from "./Quizzes/QuizzesEditor";
+import QuizCreate from "./Quizzes/QuizCreate";
+import QuizDetails from "./Quizzes/QuizDetails";
 //comment
 export default function Courses({ courses }: { courses: any[]; }) {
   const { pathname } = useLocation();
-  
+
   return (
     <div id="wd-courses">
       <div className="d-none d-md-block">
@@ -39,8 +37,8 @@ export default function Courses({ courses }: { courses: any[]; }) {
             <Route path="Assignments/:aid" element={<AssignmentsEditor />} />
             <Route path="Assignments/Add" element={<AssignmentEditor />} />
             <Route path="Quizzes" element={<Quizzes />} />
-            <Route path="Quizzes/edit/:qid" element={<QuizzesEditor/>}/>
-            <Route path="Quizzes/add/*" element={<QuizEditor/>}/>
+            <Route path="Quizzes/add/*" element={<QuizCreate />} />
+            <Route path="Quizzes/:qid/*" element={<QuizDetails />} />
             <Route path="Grades" element={<Grades />} />
             <Route path="People" element={<PeopleTable />} />
             <Route path="People/:uid" element={<PeopleTable />} />

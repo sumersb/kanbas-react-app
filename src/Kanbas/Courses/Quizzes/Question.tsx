@@ -1,12 +1,19 @@
 import React, { EventHandler, useState } from 'react';
-import MultipleChoice from './QuestionTypes/MultipleChoice';
-import TrueOrFalse from './QuestionTypes/TrueOrFalse';
-import FillInTheBlank from './QuestionTypes/FillInTheBlank';
+
+import MultipleChoice from './QuizEdits/QuestionTypes/MultipleChoice';
+import MultipleChoiceEditor from './QuizEdits/QuestionTypes/MultipleChoiceEditor';
+
+import FillInTheBlank from './QuizEdits/QuestionTypes/FillInTheBlank';
+import FillInTheBlankEditor from './QuizEdits/QuestionTypes/FillInTheBlankEditor';
+
+import TrueOrFalse from './QuizEdits/QuestionTypes/TrueOrFalse';
+import TrueOrFalseEditor from './QuizEdits/QuestionTypes/TrueOrFalseEditor';
+
 import { deleteQuiz } from './client';
 import { FaPencil } from 'react-icons/fa6';
-import MultipleChoiceEditor from './QuestionTypes/MultipleChoiceEditor';
-import FillInTheBlankEditor from './QuestionTypes/FillInTheBlankEditor';
-import TrueOrFalseEditor from './QuestionTypes/TrueOrFalseEditor';
+
+
+
 
 function Question({
   question,
@@ -24,7 +31,7 @@ function Question({
   const [tempQuestion, setTempQuestion] = useState(question);
 
   return (
-    <div className="container p-0">
+    <div className="container">
       {editing && tempQuestion.type === "multiple_choice" && (
         <MultipleChoiceEditor
           tempQuestion={tempQuestion}
@@ -32,25 +39,55 @@ function Question({
         />
       )}
       {editing && tempQuestion.type === "fill_in_blank" && (
-        <FillInTheBlankEditor />
+        <FillInTheBlankEditor
+          tempQuestion={tempQuestion}
+          setTempQuestion={setTempQuestion}
+        />
       )}
       {editing && tempQuestion.type === "true_false" && (
-        <TrueOrFalseEditor />
+        <TrueOrFalseEditor
+          tempQuestion={tempQuestion}
+          setTempQuestion={setTempQuestion}
+        />
       )}
       {!editing && question.type === "multiple_choice" && (
         <MultipleChoice
           question={question} />
       )}
       {!editing && question.type === "fill_in_blank" && (
-        <FillInTheBlank />
+        <FillInTheBlank
+          question={question} />
       )}
       {!editing && question.type === "true_false" && (
-        <TrueOrFalse />
+        <TrueOrFalse
+          question={question} />
       )}
       {!editing && (
-        <button onClick={(e) => setEditing(!editing)} className=' btn bg-secondary'>
-          Edit
-        </button>
+        <div className='float-end'>
+          <button onClick={(e) => setEditing(!editing)} className=' btn btn-secondary me-3'>
+            Edit
+          </button>
+          <button onClick={(e) => deleteQuestion(index)} className=' btn btn-danger me-3'>
+            Delete
+          </button>
+        </div>
+      )}
+      {editing && (
+        <div className='float-end'>
+          <button onClick={(e) => {
+            setEditing(!editing);
+            setTempQuestion(question)
+          }}
+            className=' btn btn-secondary btn-lg me-3'>
+            Cancel
+          </button>
+          <button onClick={(e) => {
+            setEditing(!editing);
+            updateQuestion(index, tempQuestion)
+          }} className=' btn btn-primary btn-lg me-3'>
+            Update
+          </button>
+        </div>
       )}
     </div>
 

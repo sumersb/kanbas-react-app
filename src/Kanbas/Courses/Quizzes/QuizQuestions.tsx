@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import * as client from "./client";
 import Question from "./Question";
+import { add } from "../../../Labs/Lab4/ReduxExamples/AddRedux/addReducer";
 
 export default function QuizQuestions({ quiz, setQuiz, questions, setQuestions }: {
     quiz: any;
@@ -16,7 +17,7 @@ export default function QuizQuestions({ quiz, setQuiz, questions, setQuestions }
         question: "Consequatur unde ducimus, tempore commodi quae ad blanditiis, vitae earum dolores autem reprehenderit, aspernatur nam! Non nulla omnis impedit veniam recusandae. Repudiandae fuga tempora omnis ea ducimus unde qui delectus saepe quidem expedita suscipit hic, reiciendis ex, rerum voluptatibus consequatur iste voluptate beatae a amet voluptates sapiente cupiditate ratione? Aspernatur, hic.",
         points: 10,
         choices: ["Black", "White", "Purple"],
-        answer: ''
+        answers: ["Default Answer"]
     });
 
     const addQuestions = () => {
@@ -37,17 +38,13 @@ export default function QuizQuestions({ quiz, setQuiz, questions, setQuestions }
     return (
 
         <div className="ml-3">
-            <h1>Questions</h1>
             <br />
             <br />
 
-
-            <button onClick={addQuestions}>Add Multiple Choice Question</button>
-
-            <div className="container">
+            <div className="container p-5">
                 <div className="row justify-content-center">
                     {questions.map((q: any, i: number) => (
-                        <div className="card bg-white border m-5" style={{ width: "70%", minHeight: "550px" }}>
+                        <div className="card bg-white m-5 p-0 pb-5" style={{ width: "100%" }}>
                             <Question
                                 question={q}
                                 index={i}
@@ -56,6 +53,7 @@ export default function QuizQuestions({ quiz, setQuiz, questions, setQuestions }
                             />
                         </div>
                     ))}
+                    <button type="button" onClick={addQuestions} className="btn btn-primary btn-lg btn-block">Add Question</button>
                 </div>
             </div>
 

@@ -1,6 +1,5 @@
 import { FaPlus } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
-import GreenCheckmark from "./GreenCheckMark";
 import { useParams } from "react-router";
 export default function AssignmentControls(
 ) {
