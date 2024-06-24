@@ -4,10 +4,12 @@ import { useParams } from "react-router-dom";
 
 export default function QuizPreview({
     quiz,
-    submission
+    submission,
+    role
 }: {
     quiz: any;
     submission: any;
+    role: string
 }) {
     const { cid } = useParams();
     const handleButtonClick = () => {
@@ -137,29 +139,33 @@ export default function QuizPreview({
             </br>
             <br>
             </br>
-            {!submission || submission.attempts < quiz.num_attempts ? (
-                <div className="text-center mt-3">
-                    <Link to={`/Kanbas/Courses/${cid}/Quizzes/${quiz._id}/active`}>
-                        <button
-                            type="button"
-                            className="btn btn-danger btn-lg"
-                            onClick={handleButtonClick}
-                        >
-                            Take Quiz
-                        </button>
-                    </Link>
-                </div>
-            ) : (
-                <div className="text-center mt-3">
-                    <button
-                        type="button"
-                        className="btn btn-secondary btn-lg"
-                        disabled
-                    >
-                        No more attempts available
-                    </button>
-                </div>
-            )}
+            {
+                role === "STUDENT" || role === "USER" ? (
+                    !submission || submission.attempts < quiz.num_attempts ? (
+                        <div className="text-center mt-3">
+                            <Link to={`/Kanbas/Courses/${cid}/Quizzes/${quiz._id}/active`}>
+                                <button
+                                    type="button"
+                                    className="btn btn-danger btn-lg"
+                                    onClick={handleButtonClick}
+                                >
+                                    Take Quiz
+                                </button>
+                            </Link>
+                        </div>
+                    ) : (
+                        <div className="text-center mt-3">
+                            <button
+                                type="button"
+                                className="btn btn-secondary btn-lg"
+                                disabled
+                            >
+                                No more attempts available
+                            </button>
+                        </div>
+                    )
+                ) : null // Render nothing if role is "FACULTY"
+            }
             <hr></hr>
             {submission && (
                 <GradedQuiz

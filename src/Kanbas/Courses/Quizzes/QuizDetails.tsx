@@ -116,7 +116,9 @@ export default function QuizDetails() {
                 <Route path="/" element={<Navigate to="Details" />} />
                 <Route path="Details" element={<QuizPreview
                     quiz={quiz}
-                    submission={originalSubmission} />} />
+                    submission={originalSubmission}
+                    role={role}
+                     />} />
                 <Route path="Active" element={<QuizActive
                     quiz={quiz}
                     submission={submission}
