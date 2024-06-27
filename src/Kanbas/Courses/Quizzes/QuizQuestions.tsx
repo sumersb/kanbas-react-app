@@ -1,8 +1,5 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router";
-import * as client from "./client";
+import { useState } from "react";
 import Question from "./Question";
-import { add } from "../../../Labs/Lab4/ReduxExamples/AddRedux/addReducer";
 
 export default function QuizQuestions({ quiz, setQuiz, questions, setQuestions }: {
     quiz: any;

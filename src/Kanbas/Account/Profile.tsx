@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentUser } from "./reducer";
-import JsonStringify from "../../Labs/Lab3/JsonStringify";
 export default function Profile() {
     const [profile, setProfile] = useState<any>({});
     const navigate = useNavigate();
@@ -31,16 +30,46 @@ export default function Profile() {
             <h1>Profile</h1>
             {profile && (
                 <div className="form w-50">
-                    <input className="form-control mb-2" value={profile.username} onChange={(e) => setProfile({ ...profile, username: e.target.value })} />
-                    <input className="form-control mb-2" value={profile.password} onChange={(e) => setProfile({ ...profile, password: e.target.value })} />
-                    <input className="form-control mb-2" value={profile.firstName} onChange={(e) => setProfile({ ...profile, firstName: e.target.value })} />
-                    <input className="form-control mb-2" value={profile.lastName} onChange={(e) => setProfile({ ...profile, lastName: e.target.value })} />
-                    <input className="form-control mb-2" value={profile.dob} onChange={(e) => setProfile({ ...profile, dob: e.target.value })} type="date" />
-                    <input className="form-control mb-2" value={profile.email} onChange={(e) => setProfile({ ...profile, email: e.target.value })} />
-                    <select value={profile.role} className="form-control mb-2" onChange={(e) => setProfile({ ...profile, role: e.target.value })}>
-                        <option value="USER">User</option>            <option value="ADMIN">Admin</option>
-                        <option value="FACULTY">Faculty</option>      <option value="STUDENT">Student</option>
-                    </select>
+                    <div className="row g-3">
+                        <div className="col-md-6">
+                            <label htmlFor="username" className="form-label">Username</label>
+
+                            <input className="form-control" value={profile.username} onChange={(e) => setProfile({ ...profile, username: e.target.value })} />
+                        </div>
+                        <div className="col-md-6">
+                            <label htmlFor="password" className="form-label">Password</label>
+
+                            <input className="form-control" value={profile.password} onChange={(e) => setProfile({ ...profile, password: e.target.value })} />
+                        </div>
+                        <div className="col-md-6">
+                            <label htmlFor="firstName" className="form-label">First Name</label>
+
+                            <input className="form-control" value={profile.firstName} onChange={(e) => setProfile({ ...profile, firstName: e.target.value })} />
+                        </div>
+                        <div className="col-md-6">
+                            <label htmlFor="lastName" className="form-label">Last Name</label>
+
+                            <input className="form-control" value={profile.lastName} onChange={(e) => setProfile({ ...profile, lastName: e.target.value })} />
+                        </div>
+                        <div className="col-md-6">
+                            <label htmlFor="dob" className="form-label">Date of Birth</label>
+
+                            <input className="form-control" value={profile.dob} onChange={(e) => setProfile({ ...profile, dob: e.target.value })} type="date" />
+                        </div>
+                        <div className="col-md-6">
+                            <label htmlFor="email" className="form-label">Email</label>
+
+                            <input className="form-control" value={profile.email} onChange={(e) => setProfile({ ...profile, email: e.target.value })} />
+                        </div>
+                        <div className="col-md-12">
+                            <label htmlFor="role" className="form-label">Role</label>
+
+                            <select value={profile.role} className="form-control mb-2" onChange={(e) => setProfile({ ...profile, role: e.target.value })}>
+                                <option value="USER">User</option>            <option value="ADMIN">Admin</option>
+                                <option value="FACULTY">Faculty</option>      <option value="STUDENT">Student</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
             )}
             <button onClick={() => updateProfile(profile)} className="btn btn-secondary mb-2 w-100">

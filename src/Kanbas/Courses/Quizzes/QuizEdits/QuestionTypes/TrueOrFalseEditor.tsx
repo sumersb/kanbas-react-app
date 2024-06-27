@@ -13,7 +13,6 @@ export default function TrueOrFalseEditor({
 
     return (
         <div className="container p-3">
-            {JSON.stringify(tempQuestion)}
             <div className="row align-items-center mb-3">
                 <div className="col-md-6">
                     <input

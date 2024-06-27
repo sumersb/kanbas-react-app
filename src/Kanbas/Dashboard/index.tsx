@@ -5,7 +5,6 @@ import * as userAPI from "../Account/client";
 import * as courseAPI from "../Courses/client"
 import * as enrollmentAPI from "../Enrollment/client";
 import TopView from "./TopView";
-import JsonStringify from "../../Labs/Lab3/JsonStringify";
 export default function Dashboard(
 ) {
     const navigate = useNavigate();
