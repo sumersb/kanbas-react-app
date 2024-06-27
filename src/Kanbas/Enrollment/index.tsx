@@ -41,12 +41,11 @@ export default function Enrollment() {
 
     return (
         <div>
-            {JSON.stringify(selectedCourses)}
             <h1>Enrollment</h1>
             <hr></hr>
             <form>
                 <div className="form-group">
-                    {courses.map(course => (
+                    {/* {courses.map(course => (
                         <div className="form-check border mb-3" key={course._id}>
                             <input
                                 className="form-check-input"
@@ -59,7 +58,29 @@ export default function Enrollment() {
                                 {course.name} : {course.description} : {course._id}
                             </label>
                         </div>
-                    ))}
+                    ))} */}
+                    <div className="row">
+                        {courses.map(course => (
+                            <div key={course._id} className="col-md-4 mb-3">
+                                <div className={`card ${selectedCourses.includes(course._id) ? 'bg-primary text-white' : ''}`}>
+                                    <div className="card-body">
+                                        <input
+                                            className="form-check-input"
+                                            type="checkbox"
+                                            value={course._id}
+                                            id={course._id}
+                                            onChange={handleClick}
+                                        />
+                                        <label className="form-check-label" htmlFor={course._id}>
+                                            <h5 className="card-title">{course.name}</h5>
+                                            <p className="card-text">{course.description}</p>
+                                            <p className="card-text"><small className="text-muted">Course ID: {course._id}</small></p>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                     <div className="form-group row">
                         <div className="col-sm-10">
                             <button onClick={() => enrollCourses()} className="btn btn-primary">Enroll</button>

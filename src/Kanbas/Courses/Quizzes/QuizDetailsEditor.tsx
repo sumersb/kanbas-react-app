@@ -138,17 +138,6 @@ export default function QuizDetailsEditor({ quiz, setQuiz }: {
                     </div>
                 </div>
                 <div className="mb-3 row">
-                    <label htmlFor="wd-points"
-                        className="col-sm-2 col-form-label text-end">
-                        Points
-                    </label>
-                    <div className="col-sm-10">
-                        <input type="text" className="form-control"
-                            id="wd-points" value={quiz.points}
-                            onChange={(e) => setQuiz({ ...quiz, points: e.target.value })} />
-                    </div>
-                </div>
-                <div className="mb-3 row">
                     <label htmlFor="wd-assign-to"
                         className="col-sm-2 col-form-label text-end">
                         Assign
